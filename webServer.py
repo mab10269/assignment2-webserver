@@ -36,7 +36,7 @@ def webServer(port=13331):
       outputdata += b"content-type: text/html; charset=UTF-8\r\n"
       outputdata += b"content-length: " + str(len(body)).encode() + b"\r\n"
       outputdata += b"\r\n"
-      outputdata += body
+      outputdata += bodyg
       
       connectionsocket.send(outputdata)
       connectionSocket.close()
