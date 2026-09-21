@@ -7,14 +7,14 @@ def webServer(port=13331):
   
   serverSocket.bind(("", port))
   
-  Serversocket.listen(1)
+  serverSocket.listen(1)
   
   while True:
     print('Ready to serve...')
-    connectionSocket, addr = serversocket.accept()
+    connectionSocket, addr = serverSocket.accept()
     
     try:
-      message = connectionsocket.recv(10240).decode() 
+      message = connectionSocket.recv(10240).decode() 
       filename = message.split()[1]
       
       f = open(filename[1:], rb)
@@ -23,13 +23,13 @@ def webServer(port=13331):
       outputdata += b"server: mypythonserver/1.0\r\n"
       outputdata += b"content-type: text/html; charset=UTF-8\r\n"
       outputdata += b"connection: close\r\n"
-      outputdata += b"content-length: " + str(os.path.getsize(filename[1:])).encode() + b"\r\n""    
+      outputdata += b"content-length: " + str(os.path.getsize(filename[1:])).encode() + b"\r\n"
       outputdata += b"b'\r\n" 
          
       for i in f: outputdata += i 
         
-      f.close()  
-      connectionsocket.close()
+      f.close()
+      connectionSocket.send(outputdata)  
       connectionSocket.close()
       
     except Exception as e:
@@ -43,3 +43,4 @@ def webServer(port=13331):
       connectionsocket.send(outputdata)    
 if __name__ == "__main__":
   webServer(13331)
+
