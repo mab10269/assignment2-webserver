@@ -15,11 +15,11 @@ def webServer(port=13331):
       
       f = open(filename[1:], 'rb')
     
-      outputdata = b"http/1.1 200 ok\r\n"
-      outputdata += b"server: mypythonserver/1.0\r\n"
-      outputdata += b"content-type: text/html; charset=UTF-8\r\n"
-      outputdata += b"connection: close\r\n"
-      outputdata += b"content-length: " + str(os.path.getsize(filename[1:])).encode() + b"\r\n"
+      outputdata = b"HTTP/1.1 200 ok\r\n"
+      outputdata += b"Server: MyPythonServer/1.0\r\n"
+      outputdata += b"Content-Type: text/html; charset=UTF-8\r\n"
+      outputdata += b"Connection: Close\r\n"
+      outputdata += b"Content-Length: " + str(os.path.getsize(filename[1:])).encode() + b"\r\n"
       outputdata += b"r\n" 
          
       for i in f:
@@ -31,12 +31,12 @@ def webServer(port=13331):
       
     except Exception as e:
       body = b"<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1></body></html>\r\n"
-      outputdata = b"http/1.1 404 Not Found\r\n"
-      outputdata += b"server: mypythonserver/1.0\r\n"
-      outputdata += b"content-type: text/html; charset=UTF-8\r\n"
-      outputdata += b"content-length: " + str(len(body)).encode() + b"\r\n"
+      outputdata = b"HTTP/1.1 404 Not Found\r\n"
+      outputdata += b"Server: MyPythonServer/1.0\r\n"
+      outputdata += b"Content-Type: text/html; charset=UTF-8\r\n"
+      outputdata += b"Content-Length: " + str(len(body)).encode() + b"\r\n"
       outputdata += b"\r\n"
-      outputdata += bodyg
+      outputdata += body
       
       connectionsocket.send(outputdata)
       connectionSocket.close()
