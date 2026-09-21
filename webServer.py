@@ -20,7 +20,7 @@ def webServer(port=13331):
       outputdata += b"content-type: text/html; charset=UTF-8\r\n"
       outputdata += b"connection: close\r\n"
       outputdata += b"content-length: " + str(os.path.getsize(filename[1:])).encode() + b"\r\n"
-      outputdata += b"b'\r\n" 
+      outputdata += b"r\n" 
          
       for i in f:
         outputdata += i 
@@ -30,7 +30,7 @@ def webServer(port=13331):
       connectionSocket.close()
       
     except Exception as e:
-      body = b"<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1></body></body></html>\r\n"
+      body = b"<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1></body></html>\r\n"
       outputdata = b"http/1.1 404 Not Found\r\n"
       outputdata += b"server: mypythonserver/1.0\r\n"
       outputdata += b"content-type: text/html; charset=UTF-8\r\n"
