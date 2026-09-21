@@ -26,7 +26,8 @@ def webServer(port=13331):
       outputdata += b"content-length: " + str(os.path.getsize(filename[1:])).encode() + b"\r\n"
       outputdata += b"b'\r\n" 
          
-      for i in f: outputdata += i 
+      for i in f:
+        outputdata += i 
         
       f.close()
       connectionSocket.send(outputdata)  
@@ -40,7 +41,10 @@ def webServer(port=13331):
       outputdata += b"content-length: " + str(len(body)).encode() + b"\r\n"
       outputdata += b"\r\n"
       outputdata += body
-      connectionsocket.send(outputdata)    
+      
+      connectionsocket.send(outputdata)
+      connectionSocket.close()
+
 if __name__ == "__main__":
   webServer(13331)
 
