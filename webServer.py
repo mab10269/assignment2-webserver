@@ -13,7 +13,7 @@ def webServer(port=13331):
       message = connectionSocket.recv(10240).decode() 
       filename = message.split()[1]
       
-      f = open(filename[1:], "rb")
+      f = open(filename[1:], 'rb')
     
       outputdata = b"http/1.1 200 ok\r\n"
       outputdata += b"server: mypythonserver/1.0\r\n"
