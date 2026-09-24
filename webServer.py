@@ -1,6 +1,5 @@
 from socket import *
 import sys
-import os
 
 def webServer(port=13331):
   serverSocket = socket(AF_INET, SOCK_STREAM)
@@ -15,12 +14,15 @@ def webServer(port=13331):
       filename = message.split()[1]
       
       f = open(filename[1:], 'rb')
-    
+      filedata = f.read()
+      f.close()
+      
       outputdata = b"HTTP/1.1 200 ok\r\n"
       outputdata += b"Server: MyPythonServer/1.0\r\n"
       outputdata += b"Content-Type: text/html; charset=UTF-8\r\n"
-      outputdata += b"Connection: Close\r\n"
       outputdata += b"Content-Length: " + str(os.path.getsize(filename[1:])).encode() + b"\r\n"
+      outputdata += b"Connection: Close\r\n"
+
       outputdata += b"r\n" 
          
       for i in f:
@@ -35,8 +37,8 @@ def webServer(port=13331):
       outputdata = b"HTTP/1.1 404 Not Found\r\n"
       outputdata += b"Server: MyPythonServer/1.0\r\n"
       outputdata += b"Content-Type: text/html; charset=UTF-8\r\n"
-      outputdata += b"Connection: Close\r\n"
       outputdata += b"Content-Length: " + str(len(body)).encode() + b"\r\n"
+      outputdata += b"Connection: Close\r\n"
       outputdata += b"\r\n"
       outputdata += body
       
